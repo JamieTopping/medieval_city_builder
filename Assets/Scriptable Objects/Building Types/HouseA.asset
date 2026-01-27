@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8f7db6ae0d9491bb48a23dbe4491c0, type: 3}
+  m_Name: HouseA
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingScriptableObject
+  initialHealth: 5
+  buildTime: 2
+  rechargeRate: 1
+  taskAvailable: {fileID: 11400000, guid: ef5147f0d80784a2482f7da0bc6d35f2, type: 2}
+  buildingPrefab: {fileID: 1778265184455621855, guid: e5230c96f4d714d62afe1dba06577bb5, type: 3}

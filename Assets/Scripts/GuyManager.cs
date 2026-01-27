@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class GuyManager : MonoBehaviour
 {
+    public static GuyManager _instance;
     private List<GuyClass> allGuys;
     private List<GuyClass> storedGuys;
     [SerializeField] private GameObject guyPrefab;
 
-    private void Start()
+    private void Awake()
+    {
+        _instance = this;
+        allGuys = new List<GuyClass>();
+    }
+
+    public void LoadGuys(List<GuyClass> guysToLoad)
     {
         allGuys = new List<GuyClass>();
-        for (int iGuy = 0; iGuy < 4; iGuy++)
-        {
-            allGuys.Add(new GuyClass());
-        }
+        allGuys.AddRange(guysToLoad);
         storedGuys = new List<GuyClass>();
         storedGuys.AddRange(allGuys);
+    }
+
+    public void SaveGuys(GameStateScriptableObject saveLocation)
+    {
+        saveLocation.allGuys = new List<GuyClass>();
+        saveLocation.allGuys.AddRange(allGuys);
+        if (saveLocation.allGuys == allGuys) Debug.Log("Guys saved successfully");
     }
 
     public void PlaceGuy()

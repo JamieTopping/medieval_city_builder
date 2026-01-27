@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f82622cf82b2e4dddaae8a777671b71c, type: 3}
+  m_Name: Wood
+  m_EditorClassIdentifier: Assembly-CSharp::ResourceScriptableObject
+  resourceName: wood
+  coinsValue: 2
+  resourceIcon: {fileID: 21300000, guid: cb2004853ec723c4d949c757d5d1cba2, type: 3}

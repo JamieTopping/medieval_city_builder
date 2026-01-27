@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class TileData
 {
-    // not sure
-    public string contains;
-    public bool isEmptyTile()
-    {
-        return true;
-    }
+    public BuildingScriptableObject buildings;
+    public TaskScriptableObject tileTask;
+    public int[] gridCoord;
 }

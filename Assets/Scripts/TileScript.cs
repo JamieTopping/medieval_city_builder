@@ -28,13 +28,24 @@ public class TileScript : MonoBehaviour
         defaultPosition = transform.position;
     }
 
-    public void OnPlaceTile(int[] myCoord)
+    public void OnPlaceTile(TileData inTileData)
     {
-        gridCoord = myCoord;
+        gridCoord = inTileData.gridCoord;
+        buildings = inTileData.buildings;
+        tileTask = inTileData.tileTask;
         adjacentTiles[0] = TileManager._instance.GetTile(new int[]{gridCoord[0] +1, gridCoord[1]});
         adjacentTiles[1] = TileManager._instance.GetTile(new int[]{gridCoord[0] +1, gridCoord[1] -1});
         adjacentTiles[2] = TileManager._instance.GetTile(new int[]{gridCoord[0] -1, gridCoord[1] -1});
         adjacentTiles[3] = TileManager._instance.GetTile(new int[]{gridCoord[0] -1, gridCoord[1]});
+    }
+
+    public TileData GetStorableTileData()
+    {
+        TileData outTileData = new TileData();
+        outTileData.gridCoord = gridCoord;
+        outTileData.buildings = buildings;
+        outTileData.tileTask = tileTask;
+        return outTileData;
     }
 
     public void OnClick()

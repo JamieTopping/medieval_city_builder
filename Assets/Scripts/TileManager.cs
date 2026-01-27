@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,35 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float xMultiplier;
     [SerializeField] private float yMultiplier;
     [SerializeField] private GameObject defaultTilePrefab;
+
+    private void Awake()
+    {
+        _instance = this;
+        tiles = new Dictionary<int[], TileScript>();
+    }
+
+    public void LoadTiles(List<TileData> tilesToLoad)
+    {
+        tiles = new Dictionary<int[], TileScript>();
+        foreach (TileData iTile in tilesToLoad)
+        {
+            GameObject newTile = Instantiate(defaultTilePrefab, GetTilePosition(iTile.gridCoord), Quaternion.identity);
+            tileObjects.Add(newTile);
+            tiles.Add(iTile.gridCoord, newTile.GetComponent<TileScript>());
+            tiles[iTile.gridCoord].OnPlaceTile(iTile);
+        }
+    }
+
+    public void SaveTiles(GameStateScriptableObject saveLocation)
+    {
+        List<TileData> tilesToSave = new List<TileData>();
+        foreach (TileScript iTile in tiles.Values)
+        {
+            tilesToSave.Add(iTile.GetStorableTileData());
+        }
+        saveLocation.tiles = tilesToSave;
+        if (saveLocation.tiles == tilesToSave) Debug.Log("Tiles saved successfully");
+    }
 
     public TileScript GetTile(int[] checkCoord)
     {
@@ -54,5 +84,12 @@ public class TileManager : MonoBehaviour
         {
             TileScript.selected.buildBuilding(building);
         }
+    }
+
+    [SerializeField] private int emptyX;
+    [SerializeField] private int emptyY;
+    public void CreateNextTile()
+    {
+        PlaceTile(new int[2]{emptyX, emptyY});
     }
 }

@@ -93,6 +93,11 @@ public class TileManager : MonoBehaviour
     {
         PlaceTile(new int[2]{emptyX, emptyY});
     }
+
+    public void GenerateFullBoard()
+    {
+        
+    }
 }
 
 [System.Serializable]

@@ -6,4 +6,5 @@ public class ResourceScriptableObject : ScriptableObject
     public string resourceName;
     public int coinsValue;
     public Sprite resourceIcon;
+    public GameObject inventoryPrefab;
 }

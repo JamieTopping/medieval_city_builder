@@ -16,11 +16,12 @@ public class TileManager : MonoBehaviour
         _instance = this;
         tiles = new Dictionary<int[], TileScript>();
     }
-
-    public void LoadTiles(List<TileData> tilesToLoad)
+    
+    #region Save and Load
+    public void Load(TileManagerData data)
     {
         tiles = new Dictionary<int[], TileScript>();
-        foreach (TileData iTile in tilesToLoad)
+        foreach (TileData iTile in data.tiles)
         {
             GameObject newTile = Instantiate(defaultTilePrefab, GetTilePosition(iTile.gridCoord), Quaternion.identity);
             tileObjects.Add(newTile);
@@ -28,17 +29,17 @@ public class TileManager : MonoBehaviour
             tiles[iTile.gridCoord].OnPlaceTile(iTile);
         }
     }
-
-    public void SaveTiles(GameStateScriptableObject saveLocation)
+    public void Save(ref TileManagerData data)
     {
         List<TileData> tilesToSave = new List<TileData>();
         foreach (TileScript iTile in tiles.Values)
         {
             tilesToSave.Add(iTile.GetStorableTileData());
         }
-        saveLocation.tiles = tilesToSave;
-        if (saveLocation.tiles == tilesToSave) Debug.Log("Tiles saved successfully");
+        data.tiles = tilesToSave;
+        if (data.tiles == tilesToSave) Debug.Log("Tiles saved successfully");
     }
+    #endregion
 
     public TileScript GetTile(int[] checkCoord)
     {
@@ -92,4 +93,10 @@ public class TileManager : MonoBehaviour
     {
         PlaceTile(new int[2]{emptyX, emptyY});
     }
+}
+
+[System.Serializable]
+public struct TileManagerData
+{
+    public List<TileData> tiles;
 }

@@ -15,20 +15,22 @@ public class GuyManager : MonoBehaviour
         allGuys = new List<GuyClass>();
     }
 
-    public void LoadGuys(List<GuyClass> guysToLoad)
+    #region Save and Load
+    public void Load(GuyManagerData data)
     {
         allGuys = new List<GuyClass>();
-        allGuys.AddRange(guysToLoad);
+        allGuys.AddRange(data.allGuys);
         storedGuys = new List<GuyClass>();
         storedGuys.AddRange(allGuys);
     }
 
-    public void SaveGuys(GameStateScriptableObject saveLocation)
+    public void Save(ref GuyManagerData data)
     {
-        saveLocation.allGuys = new List<GuyClass>();
-        saveLocation.allGuys.AddRange(allGuys);
-        if (saveLocation.allGuys == allGuys) Debug.Log("Guys saved successfully");
+        data.allGuys = new List<GuyClass>();
+        data.allGuys.AddRange(allGuys);
+        if (data.allGuys == allGuys) Debug.Log("Guys saved successfully");
     }
+    #endregion
 
     public void PlaceGuy()
     {
@@ -46,4 +48,10 @@ public class GuyManager : MonoBehaviour
         guyToPickUp.Pickup();
         storedGuys.Add(guyToPickUp);
     }
+}
+
+[System.Serializable]
+public struct GuyManagerData
+{
+    public List<GuyClass> allGuys;
 }

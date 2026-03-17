@@ -79,7 +79,7 @@ public class ResourceManager : MonoBehaviour
 }
 
 [System.Serializable]
-public struct ResourceManagerData
+public class ResourceManagerData
 {
     
 }

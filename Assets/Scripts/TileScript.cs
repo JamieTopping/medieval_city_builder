@@ -15,7 +15,7 @@ public class TileScript : MonoBehaviour
     public BuildingScriptableObject buildings;
     public TaskScriptableObject tileTask;
 
-    private TileScript[] adjacentTiles; // 0: NE (+1, +0) | 1: SE (+1, -1) | 2: SW (-1, -1) | 3: NW (-1, 0)
+    //private TileScript[] adjacentTiles; // 0: NE (+1, +0) | 1: SE (+1, -1) | 2: SW (-1, -1) | 3: NW (-1, 0)
     [SerializeField] private int[] gridCoord;
     public bool isRising{get; private set;}
     public bool isLowering{get; private set;}
@@ -33,10 +33,12 @@ public class TileScript : MonoBehaviour
         gridCoord = inTileData.gridCoord;
         buildings = inTileData.buildings;
         tileTask = inTileData.tileTask;
+        /*
         adjacentTiles[0] = TileManager._instance.GetTile(new int[]{gridCoord[0] +1, gridCoord[1]});
         adjacentTiles[1] = TileManager._instance.GetTile(new int[]{gridCoord[0] +1, gridCoord[1] -1});
         adjacentTiles[2] = TileManager._instance.GetTile(new int[]{gridCoord[0] -1, gridCoord[1] -1});
         adjacentTiles[3] = TileManager._instance.GetTile(new int[]{gridCoord[0] -1, gridCoord[1]});
+        */
     }
 
     public TileData GetStorableTileData()

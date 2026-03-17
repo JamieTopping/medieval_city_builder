@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class SaveManager
 {
-    private static int saveSlot = 0;
-    private static SaveData _saveData = new SaveData();
+    private static int saveSlot;
+    public static SaveData _saveData;
 
     [System.Serializable]
-    public struct SaveData
+    public class SaveData
     {
-        public TileManagerData tileManagerData;
-        public GuyManagerData guyManagerData;
+        public TileManagerData tileManagerData = new();
+        public GuyManagerData guyManagerData = new();
     }
 
     public static void AutoSave()
@@ -39,8 +39,10 @@ public class SaveManager
 
     public static void Save(int targetSaveSlot)
     {
+        _saveData = new SaveData();
         saveSlot = targetSaveSlot;
         HandleSaveData();
+        Debug.Log("Save data handled");
         File.WriteAllText(SaveFileName(), JsonUtility.ToJson(_saveData, true));
     }
 

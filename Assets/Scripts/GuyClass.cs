@@ -10,7 +10,7 @@ public class GuyClass
 
     private TaskScriptableObject currentTask;
 
-    public void Birth(int birthEnergy = 2)
+    public GuyClass(int birthEnergy = 2)
     {
         energyMax = birthEnergy;
         energy = energyMax;
@@ -20,12 +20,14 @@ public class GuyClass
     {
         myGuy = dropObject.GetComponent<GuyBehaviour>();
         tileLocation = dropTile;
+        currentTask = dropTile.tileTask;
         myGuy.BirthSprite(this);
     }
 
     public void Pickup()
     {
         myGuy.PickupGuy();
+        tileLocation = null;
     }
     
     public bool startTask(int energyCost = 1)
@@ -67,6 +69,7 @@ public class GuyClass
             default :
                 break;
         }
+        GuyManager._instance.ManagePickUp(this);
     }
     
     // task completion actions

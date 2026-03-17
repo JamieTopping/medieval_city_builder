@@ -43,11 +43,11 @@ public class TileManager : MonoBehaviour
 
     public TileScript GetTile(int[] checkCoord)
     {
-        // ReSharper disable once CanSimplifyDictionaryLookupWithTryGetValue
+        // ReSharper CanSimplifyDictionaryLookupWithTryGetValue
         return tiles.ContainsKey(checkCoord) ? tiles[checkCoord] : null;
     }
 
-    public void PlaceTile(int[] emptyCoord, GameObject tilePrefab = null)
+    public void PlaceTile(int[] emptyCoord, GameObject tilePrefab = null, TileData newTileData = null)
     {
         if (tiles.ContainsKey(emptyCoord))
         {
@@ -59,8 +59,15 @@ public class TileManager : MonoBehaviour
             {
                 tilePrefab = defaultTilePrefab;
             }
+            if (newTileData == null)
+            {
+                newTileData = new TileData();
+                newTileData.gridCoord = emptyCoord;
+            }
             GameObject newTileObj = Instantiate(tilePrefab, GetTilePosition(emptyCoord), Quaternion.identity);
-            tiles.Add(emptyCoord, newTileObj.GetComponent<TileScript>());
+            TileScript newTileScript = newTileObj.GetComponent<TileScript>();
+            newTileScript.OnPlaceTile(newTileData);
+            tiles.Add(emptyCoord, newTileScript);
         }
     }
 
@@ -101,7 +108,7 @@ public class TileManager : MonoBehaviour
 }
 
 [System.Serializable]
-public struct TileManagerData
+public class TileManagerData
 {
     public List<TileData> tiles;
 }

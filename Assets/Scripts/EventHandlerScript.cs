@@ -18,6 +18,7 @@ public class EventHandlerScript : MonoBehaviour
     public void OnClick(InputAction.CallbackContext context)
     {
         if (!context.started) return;
+        if (PauseManager.gameIsPaused) { Debug.Log("Game paused, tile click not registered"); return;}
         var rayHit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if (!rayHit.collider)
         {

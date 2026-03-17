@@ -52,6 +52,12 @@ public class CameraController : MonoBehaviour
             }
         }
     }
+    
+    // TEST function 
+    public void TESTcameraGoTo(int testBtnID)
+    {
+        
+    }
 
     public void GoToTile(TileManager targetTile)
     {

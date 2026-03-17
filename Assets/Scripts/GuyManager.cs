@@ -12,7 +12,14 @@ public class GuyManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        allGuys = new List<GuyClass>();
+        allGuys = new List<GuyClass>
+        {
+            new GuyClass(),
+            new GuyClass(),
+            new GuyClass()
+        };
+        storedGuys = new List<GuyClass>();
+        storedGuys.AddRange(allGuys);
     }
 
     #region Save and Load
@@ -51,7 +58,7 @@ public class GuyManager : MonoBehaviour
 }
 
 [System.Serializable]
-public struct GuyManagerData
+public class GuyManagerData
 {
-    public List<GuyClass> allGuys;
+    public List<GuyClass> allGuys = new();
 }
